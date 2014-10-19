@@ -15,7 +15,7 @@ RUN mkdir /server
 #conf file is at /etc/nginx/nginx.conf
 
 # Define mountable directories.
-VOLUME ["/server/"]
+VOLUME ["/server"]
 
 # Define working directory.
 WORKDIR /server
