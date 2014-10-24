@@ -8,7 +8,7 @@ FROM dockerfile/nodejs
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 
-RUN npm install -g pm2 sails grunt bower
+RUN npm install -g n pm2 sails grunt bower
 RUN mkdir /server
 
 #installs nginx to /usr/sbin/nginx
