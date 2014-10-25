@@ -8,7 +8,7 @@ FROM node:0.10.32-slim
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 
-RUN npm install -g pm2@0.11.2 sails@0.10.5 grunt bower
+RUN npm install -g pm2@0.11.1 sails@0.10.5 grunt bower
 RUN mkdir /server
 
 #installs nginx to /usr/sbin/nginx
