@@ -4,7 +4,7 @@
 ############################################################
 
 
-FROM dockerfile/nodejs
+FROM node:slim
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 
