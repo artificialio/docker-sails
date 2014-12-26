@@ -2,7 +2,7 @@
 # Dockerfile for Sane-stack to run sails.js API application
 ############################################################
 
-FROM node:0.10.34-slim
+FROM node:0.10.35-slim
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 
