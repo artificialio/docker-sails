@@ -2,11 +2,11 @@
 # Dockerfile for Sane-stack to run sails.js API application
 ############################################################
 
-FROM node:0.10.34-slim
+FROM node:0.11-slim
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 
-RUN npm install -g sails@0.10.5 grunt bower npm-check-updates
+RUN npm install -g sails@v0.11.0-rc4 grunt bower pm2 npm-check-updates
 RUN mkdir /server
 
 # Define mountable directories.
