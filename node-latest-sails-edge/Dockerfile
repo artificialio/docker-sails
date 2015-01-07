@@ -6,7 +6,7 @@ FROM node:0.11-slim
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 
-RUN npm install -g sails@v0.11.0-rc4 grunt bower pm2 npm-check-updates
+RUN npm install -g sails@beta grunt bower pm2 npm-check-updates
 RUN mkdir /server
 
 # Define mountable directories.
