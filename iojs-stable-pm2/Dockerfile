@@ -6,6 +6,9 @@ FROM iojs:slim
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 
+RUN apt-get update && \
+    apt-get install -y git
+
 RUN npm install -g sails grunt bower pm2 npm-check-updates
 RUN mkdir /server
 
