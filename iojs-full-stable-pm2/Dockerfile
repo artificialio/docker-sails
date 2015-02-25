@@ -2,11 +2,11 @@
 # Dockerfile for Sane-stack to run sails.js API application
 ############################################################
 
-FROM iojs:slim
+FROM iojs
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 
-RUN npm install -g sails grunt bower npm-check-updates
+RUN npm install -g sails grunt bower pm2 npm-check-updates
 RUN mkdir /server
 
 # Define mountable directories.
