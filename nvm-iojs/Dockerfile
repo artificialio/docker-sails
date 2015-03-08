@@ -2,7 +2,7 @@
 # Dockerfile for Sane-stack to run sails.js API application
 ############################################################
 
-FROM buildpack-deps:jessie
+FROM debian:wheezy
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 MAINTAINER Kris Williams <kris@kris.net>
@@ -14,10 +14,16 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
+      # a lot of fat comes from this package... see if we can pare it down
+      # c compiler is necessary for native modules
+      build-essential \
+      gyp \
+      libssl-dev \
+      adduser \
+      ca-certificates \
       git \
       curl \
-    && apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
+    && \
     # create "sane" group
     addgroup --gid=1000 sane && \
     # create "sane" user
@@ -26,7 +32,10 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
     mkdir /server && \
     chown -R sane:sane $HOME && \
     chown -R sane:sane /server && \
-    chown -R sane:sane /usr/local
+    chown -R sane:sane /usr/local && \
+    # clean-up packages
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 
 USER sane
 
