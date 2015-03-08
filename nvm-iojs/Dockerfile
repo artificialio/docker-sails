@@ -9,10 +9,15 @@ MAINTAINER Kris Williams <kris@kris.net>
 
 ENV NODE_VERSION iojs
 ENV HOME /home
+ENV NVM_DIR $HOME/.nvm
 ENV DEBIAN_FRONTEND noninteractive
+
+COPY sources.list /etc/apt/sources.list
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
     apt-get update && \
+    # backports git for latest git, needed for nvm install
+    apt-get -y --no-install-recommends -t wheezy-backports install git && \
     apt-get install -y --no-install-recommends \
       # a lot of fat comes from this package... see if we can pare it down
       # c compiler is necessary for native modules
@@ -21,7 +26,6 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
       libssl-dev \
       adduser \
       ca-certificates \
-      git \
       curl \
     && \
     # create "sane" group
@@ -40,13 +44,12 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
 USER sane
 
 # install node version manager, latest released/tagged version
-RUN git clone https://github.com/creationix/nvm.git $HOME/.nvm && \
-    cd $HOME/.nvm && \
-    git checkout `git describe --abbrev=0 --tags` >> /dev/null 2>&1 && \
-    cd $HOME && \
+# RUN git --version
+RUN echo $NODE_VERSION > $HOME/.nvmrc && \
+    curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | sh && \
     echo 'test -s ~/.nvm/nvm.sh && . $_' >> $HOME/.bashrc && \
     # install node
-    source $HOME/.nvm/nvm.sh && \
+    source $NVM_DIR/nvm.sh && \
     nvm install $NODE_VERSION >> /dev/null 2>&1 && \
     nvm alias default $NODE_VERSION && \
     npm -g i sails@0.11 grunt bower npm-check-updates
