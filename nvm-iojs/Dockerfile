@@ -39,12 +39,14 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
 
 USER sane
 
-# install node version manager
+# install node version manager, latest released/tagged version
 RUN git clone https://github.com/creationix/nvm.git $HOME/.nvm && \
-    cd ~ && \
+    cd $HOME/.nvm && \
+    git checkout `git describe --abbrev=0 --tags` >> /dev/null 2>&1 && \
+    cd $HOME && \
     echo 'test -s ~/.nvm/nvm.sh && . $_' >> $HOME/.bashrc && \
     # install node
-    source ~/.nvm/nvm.sh && \
+    source $HOME/.nvm/nvm.sh && \
     nvm install $NODE_VERSION >> /dev/null 2>&1 && \
     nvm alias default $NODE_VERSION && \
     npm -g i sails@0.11 grunt bower npm-check-updates
