@@ -10,7 +10,6 @@ MAINTAINER Kris Williams <kris@kris.net>
 ENV NODE_VERSION iojs
 ENV HOME /home
 ENV NVM_DIR $HOME/.nvm
-ENV NVM_VERSION v0.24.0
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY sources.list /etc/apt/sources.list
@@ -47,9 +46,10 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
 
 USER sane
 
-# install node version manager, latest released/tagged version
+# install node version manager
 RUN touch $HOME/.bashrc && \
     echo $NODE_VERSION > $HOME/.nvmrc && \
+    NVM_VERSION="$(curl -s -L http://latest.nvm.sh -o /dev/null -D - | grep -Ei '^Location: .*tag/v[0-9.]+' | grep -oEi 'v[0-9.]+')" && \
     curl https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | sh && \
     # install node
     source $NVM_DIR/nvm.sh && \
