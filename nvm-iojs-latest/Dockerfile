@@ -10,7 +10,9 @@ MAINTAINER Kris Williams <kris@kris.net>
 USER sane
 
 # install sails
-RUN npm -g i sails@0.11 grunt bower pm2
+RUN source $NVM_DIR/nvm.sh && \
+    npm -g i sails@0.11 grunt bower pm2 && \
+    npm cache clean
 
 # Define mountable directories.
 VOLUME ["/server"]
