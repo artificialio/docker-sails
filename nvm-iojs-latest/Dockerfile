@@ -2,7 +2,7 @@
 # Dockerfile for Sane-stack to run sails.js API application
 ############################################################
 
-FROM artificial:nvm-iojs-base
+FROM artificial/iojs-nvm:latest
 
 MAINTAINER Markus Padourek <markus@artificial.io>
 MAINTAINER Kris Williams <kris@kris.net>
