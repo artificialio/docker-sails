@@ -10,7 +10,7 @@ MAINTAINER Kris Williams <kris@kris.net>
 USER sane
 
 # install sails
-RUN bash -c ". /home/.bashrc && npm -g i sails@0.11 grunt bower pm2"
+RUN . /home/.bashrc && npm -g i sails@0.11 grunt bower pm2
 
 # Define mountable directories.
 VOLUME ["/server"]
