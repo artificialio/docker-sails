@@ -4,4 +4,4 @@ The goal of this image is to be a minimally sized (~306MB) docker image that sti
 
 This image is the basis for all [SANE](http://sanestack.com/) docker images.
 
-Right now the only tag supported is `latest`, which automatically installs the latest nvm and io.js. Tags can easily be added if needed. Just create an issue at: [github.com/artificialio/docker-sails/issues](https://github.com/artificialio/docker-sails/issues)
+Right now the only tag supported is `latest`, which automatically installs the latest nvm and io.js. Tags can easily be added if needed. Just request it: [github.com/artificialio/docker-sails/issues](https://github.com/artificialio/docker-sails/issues)
