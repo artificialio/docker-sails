@@ -58,4 +58,4 @@ RUN touch $HOME/.bashrc && \
     nvm alias default $NODE_VERSION
 
 # output version information
-CMD [ "npm", "version" ]
+CMD . /home/.bashrc && npm version 
