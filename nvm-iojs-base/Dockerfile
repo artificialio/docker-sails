@@ -57,5 +57,11 @@ RUN touch $HOME/.bashrc && \
     nvm install $NODE_VERSION >> /dev/null 2>&1 && \
     nvm alias default $NODE_VERSION
 
-# output version information
-CMD [ "npm", "version" ]
+# default start command
+CMD \
+    # start nvm in non-interactive shell
+    source $NVM_DIR/nvm.sh && \
+    # install any node version present in /server/.nvmrc
+    nvm install >> /dev/null 2>&1 && \
+    # print version information and exit
+    npm version

@@ -21,4 +21,11 @@ WORKDIR /server
 # Expose ports.
 EXPOSE 1337
 
-CMD [ "npm", "start" ]
+# default start command
+CMD \
+    # start nvm in non-interactive shell
+    source $NVM_DIR/nvm.sh && \
+    # install any node version present in /server/.nvmrc
+    nvm install >> /dev/null 2>&1 && \
+    # run start as indicated in package.json
+    npm start
