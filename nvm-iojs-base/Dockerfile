@@ -1,5 +1,6 @@
 ############################################################
-# Dockerfile for Sane-stack to run sails.js API application
+# Dockerfile for Node Version Manager (nvm) - base image
+# artificial:nvm-iojs-base
 ############################################################
 
 FROM debian:latest
@@ -54,15 +55,7 @@ RUN touch $HOME/.bashrc && \
     # install node
     source $NVM_DIR/nvm.sh && \
     nvm install $NODE_VERSION >> /dev/null 2>&1 && \
-    nvm alias default $NODE_VERSION && \
-    # install sails
-    npm -g i sails@0.11 grunt bower
+    nvm alias default $NODE_VERSION
 
-# Define mountable directories.
-VOLUME ["/server"]
-
-# Define working directory.
-WORKDIR /server
-
-# Expose ports.
-EXPOSE 1337
+# output version information
+CMD [ "npm", "version" ]
